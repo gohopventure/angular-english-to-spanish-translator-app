@@ -1,10 +1,23 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { TranslateService } from "./translate.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'english-to-spanish-translator';
+  text: string;
+  translatedText: string;
+
+  constructor(private translateService: TranslateService) {
+    this.text = '';
+    this.translatedText = '';
+  }
+
+  submit() {
+    this.translateService.translate(this.text).subscribe(result => {
+      this.translatedText = result;
+    });
+  }
 }
